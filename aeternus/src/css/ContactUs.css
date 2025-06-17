@@ -1,0 +1,65 @@
+#contactUsDiv{
+    border: 2px solid black;
+    border-radius: 10px;
+    box-shadow: 10px 10px 10px;
+    padding: 10px 10px;
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 15;
+    text-align: center;
+    width: 50%;
+    font-family: 'Caveat';;
+}
+
+.contacts{
+    display: flex;
+    gap: 0.5rem; /* Space between columns */
+    flex-direction: column;
+    margin-bottom: 1.5rem; /* Add space below each row */
+    font-size: 1em;
+}
+
+.contacts input, textarea {
+    padding: 0.5em;
+    border: 1px solid #ccc; /* Add a border */
+    border-radius: 5px; /* Rounded corners */
+    border: none;
+    font-family: Hsans-serif;
+}
+
+input{
+    width: 50%;
+    margin: 0 auto; /* Center the input horizontally */
+    display: block;
+    background-color: #BB9D7C;
+}
+
+textarea {
+    width: 80%;      /* Twice as wide as the input (input is 50%) */
+    min-height: 7em;  /* Optional: make it taller for better usability */
+    margin: 0 auto;
+    display: block;
+    resize: vertical; /* Allow vertical resizing */
+    background-color: #BB9D7C;
+}   
+
+#header{
+    font-size: 2rem;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: hsl(0, 0%, 10%);
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  background-color: hsl(0, 0%, 15%);
+}
