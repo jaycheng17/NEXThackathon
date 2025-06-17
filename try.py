@@ -73,26 +73,14 @@ def prompt_for_agent(image_path, text_prompt, count):
         prompts.append(prompt)
     return prompts
 
-async def promptOne(prompt, agent):
-    response = agent(prompt)
-    return response
-
-async def promptTwo(prompt, agent):
-    response = agent(prompt)
-    return response
-
-async def agentPrompt(finalPrompts, agent):
-    results = await asyncio.gather(
-        promptOne(finalPrompts[0], agent),
-        promptTwo(finalPrompts[1], agent)
-    )
 
 def main():
+    # user_input = we figure out later
     # Pinterest board URL
     pinterest_board_url = "https://pin.it/5Nu8evShN"
 
     imageUrls = getImageUrl(pinterest_board_url)
-    imagesPath = downloadImages(imageUrls)
+    imagesPath = downloadImages(imageUrls[:5])
 
     finalPath = convertToJPEG(imagesPath)
 
@@ -102,11 +90,11 @@ def main():
         top_p=0.9,
         top_k=50,
     )
-    agent = Agent(model = bedrock_model               )
+    agent = Agent(model = bedrock_model)
     
     finalPrompts = prompt_for_agent(finalPath, "What do you see in this image? Can you suggest a wedding theme based on this image?" , len(finalPath))
     
-    asyncio.run(agentPrompt(finalPrompts, agent))
+    agent(finalPrompts[0])
     
 
 
