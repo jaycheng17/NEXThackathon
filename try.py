@@ -7,6 +7,7 @@ from bs4 import BeautifulSoup
 from PIL import Image
 from strands import Agent
 from strands.models import BedrockModel
+import asyncio
 
 
 # Send HTTP GET request
@@ -71,7 +72,7 @@ def prompt_for_agent(image_path,text_prompt, count):
 
 def main():
     # Pinterest board URL
-    pinterest_board_url = "https://pin.it/7llHIRt19"
+    pinterest_board_url = "https://pin.it/7E6gemt9O"
 
     imageUrls = getImageUrl(pinterest_board_url)
     imagesPath = downloadImages(imageUrls)
@@ -80,26 +81,20 @@ def main():
 
     bedrock_model = BedrockModel(
         model_id="us.anthropic.claude-3-5-sonnet-20241022-v2:0",
-        temperature=0.3,
-        top_p=0.8,
+        temperature=0,
+        top_p=0.9,
+        top_k=50,
     )
     agent = Agent(model = bedrock_model, 
                   system_prompt=
-                  (""" You are a seasoned wedding planner with a sharp eye for décor, layout, guest experience, and thematic cohesion.
-                        When an image is provided, follow these instructions:
-                        1. List visible elements (e.g. seating, table settings, floral arrangements, background décor).
-                        2. Describe layout and spatial flow (where guests sit, walk, focal points).
-                        3. Analyze colors, textures, lighting, and how well they match the intended wedding theme.
-                        4. Highlight design strengths and any issues (e.g., awkward spacing, poor lighting, clashing colors).
-                        5. Offer actionable recommendations: décor enhancements, seating adjustments, lighting improvements, thematic refinements.
-                        Visual Focus:
-                        Color and types of flowers. Environment (outdoors or indoors)
-                        .
-                        Output Format:
-                        - Observations: bullet list.
-                        - Detailed insights: short paragraphs.
-                        - Summary: 3 to 5 key recommendations.
-                        """))
+                  (""" You are a seasoned wedding planner with a sharp eye for décor, layout, guest experience, location, and thematic cohesion.
+                        Take note of the features of the images and provide details on how the couple should have for the wedding.
+                        Output
+                        - Theme / Mood 
+                        - Decor
+                        - Setting
+                        - Color Palette   
+                   """))
     
     numberImages = len(imageUrls)
     final_prompt = prompt_for_agent(finalPath[0] + ".jpeg", "What do you see in this image? Can you suggest a wedding theme based on this image?" , 0)
