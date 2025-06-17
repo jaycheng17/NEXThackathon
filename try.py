@@ -62,17 +62,34 @@ def encode_image_to_base64(image_path):
         encoded = base64.b64encode(image_file.read()).decode("utf-8")
     return encoded
 
-def prompt_for_agent(image_path,text_prompt, count):
-    image_base64 = encode_image_to_base64(image_path)
-    if count != 1:
-        prompt = f"{text_prompt}\n\nImage: data:image/jpeg;base64,{image_base64}"
-    else:
-        prompt = f"\n\nImage: data:image/jpeg;base64,{image_base64}"
-    return prompt
+def prompt_for_agent(image_path, text_prompt, count):
+    prompts = []
+    for index in range(0, count, 5):
+        prompt = text_prompt
+        for i in range(index, index+5):
+            img = image_path[i] + ".jpeg"
+            image_base64 = encode_image_to_base64(img)
+            prompt = prompt + f"\n\nImage: data:image/jpeg;base64,{image_base64}"
+        prompts.append(prompt)
+    return prompts
+
+async def promptOne(prompt, agent):
+    response = agent(prompt)
+    return response
+
+async def promptTwo(prompt, agent):
+    response = agent(prompt)
+    return response
+
+async def agentPrompt(finalPrompts, agent):
+    results = await asyncio.gather(
+        promptOne(finalPrompts[0], agent),
+        promptTwo(finalPrompts[1], agent)
+    )
 
 def main():
     # Pinterest board URL
-    pinterest_board_url = "https://pin.it/7E6gemt9O"
+    pinterest_board_url = "https://pin.it/5Nu8evShN"
 
     imageUrls = getImageUrl(pinterest_board_url)
     imagesPath = downloadImages(imageUrls)
@@ -85,27 +102,13 @@ def main():
         top_p=0.9,
         top_k=50,
     )
-    agent = Agent(model = bedrock_model, 
-                  system_prompt=
-                  (""" You are a seasoned wedding planner with a sharp eye for décor, layout, guest experience, location, and thematic cohesion.
-                        Take note of the features of the images and provide details on how the couple should have for the wedding.
-                        Output
-                        - Theme / Mood 
-                        - Decor
-                        - Setting
-                        - Color Palette   
-                   """))
+    agent = Agent(model = bedrock_model               )
     
-    numberImages = len(imageUrls)
-    final_prompt = prompt_for_agent(finalPath[0] + ".jpeg", "What do you see in this image? Can you suggest a wedding theme based on this image?" , 0)
-    if (numberImages > 1):
-        for i in range(1,numberImages):
-            final_prompt += prompt_for_agent(finalPath[i] + ".jpeg", "nothing" , 1)
-            print("test")
-    # final_prompt = prompt_for_agent("image_converted.jpeg", "What do you see in this image? Can you suggest a wedding theme based on this image?")
+    finalPrompts = prompt_for_agent(finalPath, "What do you see in this image? Can you suggest a wedding theme based on this image?" , len(finalPath))
     
-    response2 = agent(final_prompt)
-    print(response2)
+    asyncio.run(agentPrompt(finalPrompts, agent))
+    
+
 
     # shutil.rmtree("./images")
 
