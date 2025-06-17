@@ -1,0 +1,28 @@
+nav {
+  font-family: 'Caveat';
+  font-size: 30px;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 2rem;
+  z-index: 10;
+
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  width: max-content;
+  border-radius: 8px;
+}
+
+/* Default link style */
+nav a {
+  text-decoration: none;
+  color: #BB9D7C;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color: #796044;
+}
