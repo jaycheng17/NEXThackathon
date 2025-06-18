@@ -6,34 +6,10 @@ function Services() {
 
   const signOutRedirect = () => {
     const clientId = "2edgpr2d91i7rds9hejqif6nkp";
-    const logoutUri = "http://localhost:5173/";
+    const logoutUri = "https://d1vbfpfw61fsl2.cloudfront.net/";
     const cognitoDomain = "https://us-west-24rvtrtb91.auth.us-west-2.amazoncognito.com";
     window.location.href = `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${encodeURIComponent(logoutUri)}`;
   };
-
-  const fetchData = async (event) => {
-    event.preventDefault(); // Prevent the default form submission behavior
-    const formData = {
-      url: document.getElementById("url").value
-    };
-
-    const result = await fetch("https://dz7ljnan0l.execute-api.us-west-2.amazonaws.com/TestAPI", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(formData)
-    });
-
-    if (result.ok) {
-      const data = await result.json();
-      console.log(data);
-      // document.getElementById("inputDiv").style.display = "none";
-      // document.getElementById("promptDiv").textContent = `${data}`;
-      // document.getElementById("promptDiv").classList.add("promptDiv");
-    }
-
-  }
 
   if (auth.isLoading) {
     return (<div className="loader-container">
@@ -69,9 +45,32 @@ function Services() {
     );
   }
 
+  const fetchData = async (event) => {
+    event.preventDefault(); // Prevent the default form submission behavior
+    const formData = {
+      url: document.getElementById("url").value
+    };
+
+    const result = await fetch("https://dz7ljnan0l.execute-api.us-west-2.amazonaws.com/TestAPI", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(formData)
+    });
+
+    if (result.ok) {
+      const data = await result.json();
+      console.log(data);
+      // document.getElementById("inputDiv").style.display = "none";
+      // document.getElementById("promptDiv").textContent = `${data}`;
+      // document.getElementById("promptDiv").classList.add("promptDiv");
+    }
+  }
+
   return (
     <div className="logindiv">
-      <button className="signbtn" onClick={() => auth.signinRedirect()}>Sign in</button>
+      <button className="signbtn" onClick={() => auth.signinRedirect()}>Login / Signup</button>
     </div>
   );
 }
