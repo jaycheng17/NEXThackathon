@@ -17,7 +17,7 @@ function Services() {
       url: document.getElementById("url").value
     };
 
-    const result = await fetch("https://w5l55ytt15.execute-api.us-west-2.amazonaws.com/default/test2", {
+    const result = await fetch("https://w5l55ytt15.execute-api.us-west-2.amazonaws.com/dev/test2", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -27,14 +27,16 @@ function Services() {
 
     if (result.ok) {
       const data = await result.json();
-      console.log(data);
+      const bodyData = JSON.parse(data.body)
+      console.log(bodyData)
+
       const inputDiv = document.getElementById("inputDiv");
       const servicesDiv = document.getElementById("servicesDiv");
       servicesDiv.removeChild(inputDiv)
 
       const promptDiv = document.createElement("div");
       promptDiv.classList.add("promptDiv");
-      promptDiv.textContent = `Prompt: INPUT PROMPT HERE`;
+      promptDiv.textContent = `Prompt: ${bodyData}`;
       promptDiv.style.display = "block";
       servicesDiv.appendChild(promptDiv);
     }
