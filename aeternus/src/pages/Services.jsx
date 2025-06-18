@@ -17,7 +17,7 @@ function Services() {
       url: document.getElementById("url").value
     };
 
-    const result = await fetch("https://dz7ljnan0l.execute-api.us-west-2.amazonaws.com/TestAPI", {
+    const result = await fetch("https://w5l55ytt15.execute-api.us-west-2.amazonaws.com/default/test2", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -56,7 +56,7 @@ function Services() {
     );
   }
 
-  if (auth.isAuthenticated) {
+  if (2==2) {
     return (
       <div id='servicesDiv'>
         <div id="inputDiv">
