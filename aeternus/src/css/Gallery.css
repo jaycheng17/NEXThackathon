@@ -1,0 +1,11 @@
+.cardDiv {
+  transform: translateX();
+  padding: 2rem;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  width: max-content;
+  border-radius: 8px;
+  margin-top: 120px;
+}
