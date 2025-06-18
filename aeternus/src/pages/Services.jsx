@@ -1,4 +1,3 @@
-
 import "../css/Services.css";
 
 function Services() {
@@ -10,7 +9,7 @@ function Services() {
       url: document.getElementById("url").value
     };
 
-    const result = await fetch("https://w5l55ytt15.execute-api.us-west-2.amazonaws.com/dev//test2", {
+    const result = await fetch("https://w5l55ytt15.execute-api.us-west-2.amazonaws.com/default/test2", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

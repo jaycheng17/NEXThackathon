@@ -11,7 +11,7 @@ const Gallery = () => {
       <div className="cardDiv" align="center" >
         <Card name="Wei Xiang" test="I LOVE AWS LAMBDA" imgs={wx} />
         <Card name="Matthew" test="sentence_transformers LOL" imgs={matt}/>
-        <Card name="Jeryl" test="You want a Bride?&#13;I'll give you a Bribe :D" imgs={jk}/>
+        <Card name="Jeryl" test="You want a Bride? I'll give you a Bribe :D" imgs={jk}/>
         <Card name="Jay" test="This app helped me get married in 2 days" imgs={jay}/>
       </div>  
   );
