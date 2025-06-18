@@ -1,4 +1,5 @@
 import { useAuth } from "react-oidc-context";
+import "../css/Services.css";
 
 function Services() {
   const auth = useAuth();
@@ -11,30 +12,36 @@ function Services() {
   };
 
   if (auth.isLoading) {
-    return <div>Loading...</div>;
+    return (<div className="loader-container">
+      <span class="loader"></span>
+    </div>);
   }
 
   if (auth.error) {
-    return <div>Encountering error... {auth.error.message}</div>;
+    return (
+      <div className="errordiv">
+        <p>Error: {auth.error.message}</p>
+        <button className="signbtn" onClick={() => auth.signinRedirect()}>Retry Sign in</button>
+      </div>
+    );
   }
 
   if (auth.isAuthenticated) {
     return (
       <div>
         <pre> Hello: {auth.user?.profile.email} </pre>
-        <pre> ID Token: {auth.user?.id_token} </pre>
-        <pre> Access Token: {auth.user?.access_token} </pre>
-        <pre> Refresh Token: {auth.user?.refresh_token} </pre>
+        
 
-        <button onClick={() => auth.removeUser()}>Sign out</button>
+        <div className="logoutdiv">
+          <button className="signbtn" onClick={() => {auth.removeUser(); signOutRedirect();}}>Sign out</button>
+        </div>
       </div>
     );
   }
 
   return (
-    <div>
-      <button onClick={() => auth.signinRedirect()}>Sign in</button>
-      <button onClick={() => signOutRedirect()}>Sign out</button>
+    <div className="logindiv">
+      <button className="signbtn" onClick={() => auth.signinRedirect()}>Sign in</button>
     </div>
   );
 }
