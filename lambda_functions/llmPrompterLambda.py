@@ -9,6 +9,7 @@ import urllib.request
 import urllib.error
 import boto3
 
+
 # Send HTTP GET request
 def getImageUrl(url):
     imageUrls = []
@@ -79,6 +80,27 @@ def prompt_for_agent(image_path, text_prompt, count):
     prompts.append(prompt)
     return prompts
 
+
+def callVectorDB(result):
+    vectorDB_lambda_api = "API HERE!!!!"
+    payload = {"query": result}
+    headers = {
+        "Content-Type": "application/json"}
+    
+    request = urllib.request.Request(
+        vectorDB_lambda_api,
+        data=json.dumps(payload).encode('utf-8'),
+        headers=headers,
+        method='POST'
+    )
+
+
+    with urllib.request.urlopen(request) as response:
+        response_data = response.read().decode('utf-8')
+        data = json.loads(response_data)['body']
+        return data['results']
+
+
 def lambda_handler(event, context):
     if event.get('httpMethod') == 'OPTIONS':
         return {
@@ -122,11 +144,14 @@ def lambda_handler(event, context):
     )
     result = agent(finalPrompts[0])
 
-
     shutil.rmtree("/tmp/images")
 
-    
+
+    result = str(result)
     # to change to another lambda call
+    finalResult = callVectorDB(result)
+
+
     return {
         "statusCode": 200,
         'headers': {
@@ -134,5 +159,8 @@ def lambda_handler(event, context):
             "Access-Control-Allow-Headers": "Content-Type",
             "Access-Control-Allow-Methods": "POST,OPTIONS"
         },
-        "body": json.dumps(str(result))
+        "body": json.dumps(str(finalResult))
     }
+
+
+# Note: Ensure that the AWS credentials and permissions are set correctly for the Lambda function to access Bedrock and other AWS services.
