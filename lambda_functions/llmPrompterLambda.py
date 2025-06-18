@@ -71,13 +71,12 @@ def encode_image_to_base64(image_path):
 
 def prompt_for_agent(image_path, text_prompt, count):
     prompts = []
-    for index in range(0, count, 5):
-        prompt = text_prompt
-        for i in range(index, index+5):
-            img = image_path[i] + ".jpeg"
-            image_base64 = encode_image_to_base64(img)
-            prompt = prompt + f"\n\nImage: data:image/jpeg;base64,{image_base64}"
-        prompts.append(prompt)
+    prompt = text_prompt
+    for index in range(0, 5):
+        img = image_path[index] + ".jpeg"
+        image_base64 = encode_image_to_base64(img)
+        prompt = prompt + f"\n\nImage: data:image/jpeg;base64,{image_base64}"
+    prompts.append(prompt)
     return prompts
 
 def lambda_handler(event, context):

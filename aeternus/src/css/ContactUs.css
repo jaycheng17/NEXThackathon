@@ -59,6 +59,7 @@ button {
   background-color: hsl(0, 0%, 10%);
   cursor: pointer;
   transition: border-color 0.25s;
+  color: white;
 }
 button:hover {
   background-color: hsl(0, 0%, 15%);
