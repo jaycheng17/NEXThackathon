@@ -11,9 +11,33 @@ function Services() {
     window.location.href = `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${encodeURIComponent(logoutUri)}`;
   };
 
+  const fetchData = async (event) => {
+    event.preventDefault(); // Prevent the default form submission behavior
+    const formData = {
+      url: document.getElementById("url").value
+    };
+
+    const result = await fetch("https://dz7ljnan0l.execute-api.us-west-2.amazonaws.com/TestAPI", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(formData)
+    });
+
+    if (result.ok) {
+      const data = await result.json();
+      console.log(data);
+      // document.getElementById("inputDiv").style.display = "none";
+      // document.getElementById("promptDiv").textContent = `${data}`;
+      // document.getElementById("promptDiv").classList.add("promptDiv");
+    }
+
+  }
+
   if (auth.isLoading) {
     return (<div className="loader-container">
-      <span class="loader"></span>
+      <span className="loader"></span>
     </div>);
   }
 
@@ -29,11 +53,17 @@ function Services() {
   if (auth.isAuthenticated) {
     return (
       <div>
-        <pre> Hello: {auth.user?.profile.email} </pre>
-        
+        <div id="inputDiv">
+          <form>
+            Enter Your Pinterest Board Link:
+            <input type="text" name="pinterest_board_url" id="url" />
+            <button onClick={fetchData} id="submitBtn">Submit</button>
+          </form>
+        </div>
+
 
         <div className="logoutdiv">
-          <button className="signbtn" onClick={() => {auth.removeUser(); signOutRedirect();}}>Sign out</button>
+          <button className="signbtn" onClick={() => { auth.removeUser(); signOutRedirect(); }}>Sign out</button>
         </div>
       </div>
     );
