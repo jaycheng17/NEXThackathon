@@ -69,6 +69,7 @@ Aeternus is an intelligent wedding planner web application built with React and 
 
 Aeternus integrates with both AWS Lambda, Bedrock and OpenSearch to analyze Pinterest boards and suggest wedding themes using AI. The Lambda function is located in the lambda_functions/ directory.
 
+**For Testing: <a href="https://dza8twc2m699a.cloudfront.net/">https://dza8twc2m699a.cloudfront.net/</a>**
 **Disclaimer: Due to limitations of LLM, prompts may take up to a minute to process. Thanks for waiting ❤️**
 
 This project is for educational and hackathon purposes.
