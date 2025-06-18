@@ -28,9 +28,15 @@ function Services() {
     if (result.ok) {
       const data = await result.json();
       console.log(data);
-      // document.getElementById("inputDiv").style.display = "none";
-      // document.getElementById("promptDiv").textContent = `${data}`;
-      // document.getElementById("promptDiv").classList.add("promptDiv");
+      const inputDiv = document.getElementById("inputDiv");
+      const servicesDiv = document.getElementById("servicesDiv");
+      servicesDiv.removeChild(inputDiv)
+
+      const promptDiv = document.createElement("div");
+      promptDiv.classList.add("promptDiv");
+      promptDiv.textContent = `Prompt: INPUT PROMPT HERE`;
+      promptDiv.style.display = "block";
+      servicesDiv.appendChild(promptDiv);
     }
 
   }
@@ -52,7 +58,7 @@ function Services() {
 
   if (auth.isAuthenticated) {
     return (
-      <div>
+      <div id='servicesDiv'>
         <div id="inputDiv">
           <form>
             Enter Your Pinterest Board Link:
