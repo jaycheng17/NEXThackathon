@@ -1,15 +1,7 @@
-import { useAuth } from "react-oidc-context";
 import "../css/Services.css";
 
 function Services() {
-  const auth = useAuth();
 
-  const signOutRedirect = () => {
-    const clientId = "2edgpr2d91i7rds9hejqif6nkp";
-    const logoutUri = "https://d1vbfpfw61fsl2.cloudfront.net/";
-    const cognitoDomain = "https://us-west-24rvtrtb91.auth.us-west-2.amazoncognito.com";
-    window.location.href = `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${encodeURIComponent(logoutUri)}`;
-  };
 
   if (auth.isLoading) {
     return (<div className="loader-container">
