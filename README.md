@@ -82,7 +82,9 @@ You need to upload the zip file into your own Amazon Lambda and for Lambda_funct
 **For Testing: <a href="https://dza8twc2m699a.cloudfront.net/">https://dza8twc2m699a.cloudfront.net/</a>**<br>
 **Disclaimer: Due to limitations of LLM, prompts may take up to 30 seconds to process. You need to click submit again after around 30 seconds. Thanks for waiting ❤️**
 
-**Some Pinterest Boards you can use: <a href="https://www.pinterest.com/jaycheng120/testtest/"> https://www.pinterest.com/jaycheng120/testtest/</a>**
+**Some Pinterest Boards you can use: 
+<a href="https://www.pinterest.com/jaycheng120/testtest/"> https://www.pinterest.com/jaycheng120/testtest/</a>** <br>
+
 This project is for educational and hackathon purposes.
 
 Built with ❤️ by university students for love.
