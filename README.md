@@ -67,11 +67,22 @@ Aeternus is an intelligent wedding planner web application built with React and 
       [vite.config.js](http://_vscodecontentref_/4)   # Vite configuration
    ```
 
-Aeternus integrates with both AWS Lambda, Bedrock and OpenSearch to analyze Pinterest boards and suggest wedding themes using AI. The Lambda function is located in the lambda_functions/ directory.
+Aeternus integrates with both AWS Lambda, OpenAI and OpenSearch to analyze Pinterest boards and suggest wedding themes using AI. The Lambda function is located in the lambda_functions/ directory.
+## Lambda Structure
+```sh
+   aeternus/
+      lambda_function1/
+         LLM_Prompt.zip
+         dependencies(1).zip
+      lambda_function2/
+         Search_Engine.zip
+```
+You need to upload the zip file into your own Amazon Lambda and for Lambda_function1, you need to add a layer which is dependencies(1).zip
 
 **For Testing: <a href="https://dza8twc2m699a.cloudfront.net/">https://dza8twc2m699a.cloudfront.net/</a>**<br>
-**Disclaimer: Due to limitations of LLM, prompts may take up to a minute to process. Thanks for waiting ❤️**
+**Disclaimer: Due to limitations of LLM, prompts may take up to 30 seconds to process. You need to click submit again after around 30 seconds. Thanks for waiting ❤️**
 
+**Some Pinterest Boards you can use: <a href="https://www.pinterest.com/jaycheng120/testtest/"> https://www.pinterest.com/jaycheng120/testtest/</a>**
 This project is for educational and hackathon purposes.
 
 Built with ❤️ by university students for love.
